@@ -16,6 +16,16 @@ import KeyPad from '../components/KeyPad.vue';
   let tempsInici = 0;
 
   function rebreTecla(tecla){
+    let tempsArribada = performance.now();
+    let dif = (tempsArribada-tempsInici)/1000;
+
+    for(let index = 0; index < resultats.value.length; index++){
+      if(resultats.value[index].tecla == tecla){
+        console.log("tecla repetida");
+        return;
+      }
+    }
+
     
     console.log("se supone que han apretqado "+tecla)
   }
