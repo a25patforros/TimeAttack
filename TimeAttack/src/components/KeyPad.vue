@@ -1,7 +1,8 @@
 <script setup>
 defineProps({
   tecles: Array,
-  bloquejat: Boolean
+  bloquejat: Boolean,
+  premudes: Array
 });
 
 const emit = defineEmits(['premuda']);
@@ -11,7 +12,7 @@ const emit = defineEmits(['premuda']);
   <div class="d-flex justify-content-center gap-3 w-100">
     <button v-for="(tecla, index) in tecles"
       :key = "tecla"
-      :disabled="bloquejat"
+      :disabled="bloquejat || premudes.includes(tecla)"
       @click="emit('premuda', tecla)"
       class="btn btn-lg"
       :class="['btn-primary', 'btn-danger', 'btn-warning', 'btn-success'][index]"
