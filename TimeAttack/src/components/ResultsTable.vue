@@ -20,7 +20,7 @@ defineProps({
                 <td>{{ r.tecla }}</td>
                 <td>{{ r.objectiu }}</td>
                 <td>{{ r.tempsReal }}</td>
-                <td>{{ r.error }}</td>
+                <td>{{ r.diferencia }}</td>
             </tr>
         </tbody>
     </table>
