@@ -2,6 +2,7 @@
 import KeyPad from '../components/KeyPad.vue';
 import ResultsTable from '@/components/ResultsTable.vue';
 import { onMounted, onUnmounted, ref } from 'vue';
+import { socket } from '@/services/socket'
 import { useGameStore } from '@/stores/game.js';
 import ScoreBoard from '@/components/ScoreBoard.vue';
 
@@ -104,12 +105,20 @@ import ScoreBoard from '@/components/ScoreBoard.vue';
     rebreTecla(teclaTeclat);
   }
 
+  function connectat() {
+  console.log('Connectat al servidor!', socket.id)
+  }
+
   //mounted unmounted
   onMounted(() => {
-      document.addEventListener('keydown',escoltarTeclat);
+    socket.on('connect', connectat);
+    socket.connect();
+    document.addEventListener('keydown',escoltarTeclat);   
   });
 
   onUnmounted(() => {
+    socket.off('connect', connectat);
+    socket.disconnect();
     document.removeEventListener('keydown', escoltarTeclat);
   });
 
