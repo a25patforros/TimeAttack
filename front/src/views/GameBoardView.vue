@@ -22,16 +22,15 @@ import ScoreBoard from '@/components/ScoreBoard.vue';
 
   let tempsInici = 0;
 
+  function rebreClassificacio(dades) {
+    console.log('Classificació rebuda:', dades)
+
+    store.actualitzarClassificacio(dades)
+  }
+
   function rebreTecla(tecla){
     let tempsArribada = performance.now();
     let dif = (tempsArribada-tempsInici)/1000;
-
-    /*for(let index = 0; index < resultats.value.length; index++){
-      if(resultats.value[index].tecla == tecla){
-        console.log("tecla repetida");
-        return;
-      }
-    }*/
 
     if(premudes.value.includes(tecla)){
       console.log("tecla repetida");
@@ -62,6 +61,11 @@ import ScoreBoard from '@/components/ScoreBoard.vue';
       }
 
       store.guardarPartida(Number(diferenciaTotal.toFixed(2)));
+      
+      socket.emit('resultat', {
+        nom: store.nomJugador,
+        errorTotal: diferenciaTotal
+      });
     }
   }
 
@@ -112,12 +116,14 @@ import ScoreBoard from '@/components/ScoreBoard.vue';
   //mounted unmounted
   onMounted(() => {
     socket.on('connect', connectat);
+    socket.on('classificacio', rebreClassificacio);
     socket.connect();
     document.addEventListener('keydown',escoltarTeclat);   
   });
 
   onUnmounted(() => {
     socket.off('connect', connectat);
+    socket.off('classificacio', rebreClassificacio);
     socket.disconnect();
     document.removeEventListener('keydown', escoltarTeclat);
   });

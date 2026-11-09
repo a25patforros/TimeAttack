@@ -1,7 +1,13 @@
 <script setup>
 import { useGameStore } from '@/stores/game';
+import { computed } from 'vue';
 
 const store = useGameStore();
+
+const classificacioOrdenada = computed( () =>
+    store.classificacio.slice().sort((a,b) => a.errorTotal - b.errorTotal)
+);
+
 </script>
 
 <template>
@@ -13,20 +19,18 @@ const store = useGameStore();
 
             <thead class="table-primary">
                 <tr>
-                <th>Partida</th>
                 <th>Jugador</th>
                 <th>Error total</th>
                 </tr>
             </thead>
 
             <tbody>
-                <tr v-for="partida in store.partides" :key="partida.id">
-                    <td>{{ partida.id }}</td>
-                    <td>{{ partida.nom }}</td>
-                    <td>{{ partida.diferenciaTotal }}</td>
+                <tr v-for="(resultat, index) in classificacioOrdenada" :key="index">
+                    <td>{{ resultat.nom }}</td>
+                    <td>{{ resultat.errorTotal }}</td>
                 </tr>
 
-                <tr v-if="store.partides.length === 0">
+                <tr v-if="store.classificacio.length === 0">
                     <td colspan="3" class="text-center text-secondary py-3">
                     Todavía no hay partidas guardadas.
                     </td>
