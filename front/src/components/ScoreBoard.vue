@@ -25,7 +25,7 @@ const classificacioOrdenada = computed( () =>
             </thead>
 
             <tbody>
-                <tr v-for="(resultat, index) in classificacioOrdenada" :key="index">
+                <tr v-for="(resultat, index) in classificacioOrdenada" :key="index"  :class="index === 0 ? 'table-success' : ''">
                     <td>{{ resultat.nom }}</td>
                     <td>{{ resultat.errorTotal }}</td>
                 </tr>
