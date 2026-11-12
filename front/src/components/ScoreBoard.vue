@@ -9,7 +9,6 @@ const classificacioOrdenada = computed( () =>
 );
 
 </script>
-
 <template>
     <div class="card shadow-sm border-0 mx-auto p-4" style="max-width: 650px;">
         <h2 class="h4 text-center mb-4">📋 Historial de partidas</h2>
@@ -36,13 +35,7 @@ const classificacioOrdenada = computed( () =>
                     </td>
                 </tr>
             </tbody>
-
       </table>
     </div>
-
   </div>
 </template>
-
-<style scoped>
-
-</style>
