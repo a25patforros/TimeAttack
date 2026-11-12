@@ -1,7 +1,7 @@
 import { createServer } from 'node:http'
 import { Server } from 'socket.io'
 
-const PORT = Number(process.env.PORT || 3000)
+const PORT = 30110;
 const classificacio = []
 
 // Petita ruta HTTP per comprovar que el servidor funciona.
